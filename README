@@ -1,0 +1,47 @@
+NAME
+    CPAN::YACSmoke::Plugin::NNTPWeb - NNTP web plugin for CPAN::YACSmoke
+
+SYNOPSIS
+      my $plugin = CPAN::YACSmoke::Plugin::NNTPWeb->new(%config);
+      my @list = $plugin->download_list();
+
+REQUIREMENTS
+    This package requires the following modules (most of which are not
+    included with Perl):
+
+      CPAN::YACSmoke
+      WWW::Mechanize
+      Template::Extract
+      Storable
+
+Installation
+    Installation can be done using the traditional Makefile.PL method.
+
+      perl Makefile.PL
+      make
+      make test
+      make install
+
+    (On Windows platforms you should use nmake instead.)
+
+DESCRIPTION
+    This module is intended to be used as a plugin extension with
+	CPAN::YACSmoke. Its use standalone, is not terribly useful, as such
+	see CPAN::YACSmoke for more useful information.
+
+CAVEATS
+    This is a proto-type release. Use with caution and supervision.
+
+    The current version has a very primitive interface and limited
+    functionality. Future versions may have a lot of options.
+
+AUTHOR
+    Barbie <barbie at cpan.org>
+
+COPYRIGHT AND LICENSE
+    Copyright (C) 2005 by Barbie. All Rights Reserved.
+
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself, either Perl version 5.8.3 or, at
+    your option, any later version of Perl 5 you may have available.
+
