@@ -35,11 +35,26 @@ CAVEATS
     The current version has a very primitive interface and limited
     functionality. Future versions may have a lot of options.
 
+BUGS, PATCHES & FIXES
+
+    There are no known bugs at the time of this release. However, if you spot
+    a bug or are experiencing difficulties, that is not explained within the 
+    POD documentation, please send an email to barbie@cpan.org or submit a bug
+    to the RT system (http://rt.cpan.org/). However, it would help greatly if
+    you are able to pinpoint problems or even supply a patch. 
+
+    Fixes are dependant upon their severity and my availablity. Should a fix 
+    not be forthcoming, please feel free to (politely) remind me.
+
 AUTHOR
-    Barbie <barbie at cpan.org>
+
+    Barbie, <barbie@cpan.org>
+    for Miss Barbell Productions <http://www.missbarbell.co.uk>.
 
 COPYRIGHT AND LICENSE
-    Copyright (C) 2005 by Barbie. All Rights Reserved.
+
+    Copyright (C) 2005 Barbie for Miss Barbell Productions.
+    All Rights Reserved.
 
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself, either Perl version 5.8.3 or, at

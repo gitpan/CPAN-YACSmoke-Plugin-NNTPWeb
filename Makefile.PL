@@ -11,5 +11,7 @@ WriteMakefile
 				'Template::Extract'     => 0,
 				'Storable'              => 0,
     },
-    'INSTALLDIRS' => 'site',
+    ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
+      (ABSTRACT	=> 'NNTP web plugin for CPAN::YACSmoke',
+       AUTHOR	=> 'Barbie <barbie@cpan.org>') : ()),
 );

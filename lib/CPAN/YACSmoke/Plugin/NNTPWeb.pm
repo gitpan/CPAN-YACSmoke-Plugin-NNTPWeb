@@ -1,13 +1,20 @@
+package CPAN::YACSmoke::Plugin::NNTPWeb;
+use strict;
+
+our $VERSION = '0.03';
+
+# -------------------------------------
+
 =head1 NAME
 
-CPAN::YACSmoke::Plugin::NNTPWeb - NNTP web list for Yet Another CPAN Smoke Tester
+CPAN::YACSmoke::Plugin::NNTPWeb - NNTP web plugin for CPAN::YACSmoke
 
 =head1 SYNOPSIS
 
   use CPAN::YACSmoke;
   my $config = {
-	  list_from => 'NNTPWeb',
-      nntp_id => 180500 # NNTP id to start from (*)
+      list_from => 'NNTPWeb',
+      nntp_id => 180500       # NNTP id to start from (*)
   };
   my $foo = CPAN::YACSmoke->new(config => $config);
   my @list = $foo->download_list($testrun);
@@ -23,11 +30,6 @@ webpage at http://www.nntp.perl.org/group/perl.cpan.testers/.
 This module should be use together with CPAN::YACSmoke.
 
 =cut
-
-package CPAN::YACSmoke::Plugin::NNTPWeb;
-use strict;
-
-our $VERSION = '0.01';
 
 # -------------------------------------
 # Library Modules
@@ -173,10 +175,16 @@ severely buggy.  Do not run this on a critical machine.
 This module uses the backend of CPANPLUS to do most of the work, so is
 subject to any bugs of CPANPLUS.
 
-=head2 Suggestions and Bug Reporting
+=head1 BUGS, PATCHES & FIXES
 
-Please submit suggestions and report bugs to the CPAN Bug Tracker at
-L<http://rt.cpan.org>.
+There are no known bugs at the time of this release. However, if you spot a
+bug or are experiencing difficulties, that is not explained within the POD
+documentation, please send an email to barbie@cpan.org or submit a bug to the
+RT system (http://rt.cpan.org/). However, it would help greatly if you are 
+able to pinpoint problems or even supply a patch. 
+
+Fixes are dependant upon their severity and my availablity. Should a fix not
+be forthcoming, please feel free to (politely) remind me.
 
 =head1 SEE ALSO
 
@@ -191,14 +199,12 @@ For additional information, see the documentation for these modules:
 
 =head1 AUTHOR
 
-Barbie, C< <<barbie@cpan.org>> >
-for Miss Barbell Productions, L<http://www.missbarbell.co.uk>
-
-Birmingham Perl Mongers, L<http://birmingham.pm.org/>
+  Barbie, <barbie@cpan.org>
+  for Miss Barbell Productions <http://www.missbarbell.co.uk>.
 
 =head1 COPYRIGHT AND LICENSE
 
-  Copyright (C) 2005 Barbie for Miss Barbell Productions
+  Copyright (C) 2005 Barbie for Miss Barbell Productions.
   All Rights Reserved.
 
   This module is free software; you can redistribute it and/or 

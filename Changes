@@ -1,5 +1,8 @@
 Revision history for Perl extension CPAN::YACSmoke::Plugin::NNTPWeb.
 
+0.03	03/03/2005
+	- Updated POD
+
 0.02 Sat Feb 19 2005
 	- Taken out of CPAN-YACSmoke distribution and made into a standalone
 	  distribution.

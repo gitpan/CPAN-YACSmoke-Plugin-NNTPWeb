@@ -18,7 +18,7 @@ bless $smoke, 'CPAN::YACSmoke';
 
 my $self  = {
     smoke   => $smoke,
-    nntp_id => 180550
+    nntp_id => 187380
 };
 
 my $plugin = CPAN::YACSmoke::Plugin::NNTPWeb->new($self);
