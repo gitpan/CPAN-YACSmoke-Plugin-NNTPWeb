@@ -1,7 +1,8 @@
 package CPAN::YACSmoke::Plugin::NNTPWeb;
+
 use strict;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 # -------------------------------------
 
@@ -196,6 +197,14 @@ For additional information, see the documentation for these modules:
   CPANPLUS
   Test::Reporter
   CPAN::YACSmoke
+
+=head1 DSLIP
+
+  b - Beta testing
+  d - Developer
+  p - Perl-only
+  O - Object oriented
+  p - Standard-Perl: user may choose between GPL and Artistic
 
 =head1 AUTHOR
 
