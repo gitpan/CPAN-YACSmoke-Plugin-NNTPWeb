@@ -1,10 +1,14 @@
+Artistic
 Changes
-Makefile.PL
+LICENSE
 MANIFEST
 META.yml
+Makefile.PL
 README
+examples/examples.txt
 lib/CPAN/YACSmoke/Plugin/NNTPWeb.pm
 t/00basics.t
 t/14nntpweb.t
 t/90podtest.t
 t/91podcover.t
+t/94metatest.t

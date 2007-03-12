@@ -2,7 +2,7 @@ package CPAN::YACSmoke::Plugin::NNTPWeb;
 
 use strict;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 # -------------------------------------
 
@@ -40,6 +40,8 @@ use lib qw(./lib);
 use WWW::Mechanize;
 use Template::Extract;
 use Storable;
+use File::Basename;
+use File::Path;
 
 # -------------------------------------
 # Constants
@@ -78,7 +80,7 @@ Creates the plugin object.
 =cut
     
 sub new {
-    my $class = shift || __PACKAGE__;
+    my $class = shift;
     my $hash  = shift;
 
     my $self = {};
@@ -102,35 +104,28 @@ latest id.
 =cut
     
 sub download_list {
-    my $self = shift;
-	my $testrun = shift || 0;
+    my $self    = shift;
+	my $liverun = shift || 0;
     my @modules;
 
+    return ()   unless($self->{smoke});
     my $cutoff = $self->{nntp_id} || $self->_get_storage();
 
-    my $limit = $cutoff - 1;
-    $last_key = $cutoff;
+    my $start = $cutoff - 1;
+    my $stop  = $start + LIMIT;
 
-    do {
-        $limit += LIMIT;
-        $mechanize->get( NNTP . ";max=$limit" );
+    while ($start < $stop) {
+        $mechanize->get( NNTP . "/$start" );
         return @modules unless($mechanize->success());
 
-        my $data = $extract->extract($template, $mechanize->content());
-        foreach my $post (@{$data->{data}}) {
-            next    unless($post->{counter});
-            $post->{counter} =~ s/^.*?>(\d+)<.*/$1/;
-            next    if($cutoff > $post->{counter});
-            $last_key = $post->{counter}    if($last_key < $post->{counter});
-
-            next    unless($post->{subject} =~ /CPAN Upload/);
-            $post->{subject} =~ s/CPAN Upload:\s+//;
-
-            push @modules, $post->{subject};
+        my $content = $mechanize->content();
+        if($content =~ /CPAN Upload: ([^\s]+)/is) {
+            push @modules, $1;
         }
-    } while($limit == $last_key);
+        $start++;
+    };
 
-    $self->_put_storage($last_key)	if($testrun);
+    $self->_put_storage($start)	if($liverun);
 
     return @modules;
 }
@@ -149,6 +144,9 @@ sub _put_storage {
     my $nntp  = shift;
     my $store = $self->{smoke}->basedir() . STORAGE;
     my $smoke = {};
+
+    # make the directory if this is a new file
+    if(!-f $store) { mkpath(dirname($store)); }
 
     $smoke = retrieve($store)   if(-r $store);
     $smoke->{nntp_id} = $nntp;
@@ -176,16 +174,19 @@ severely buggy.  Do not run this on a critical machine.
 This module uses the backend of CPANPLUS to do most of the work, so is
 subject to any bugs of CPANPLUS.
 
-=head1 BUGS, PATCHES & FIXES
+=head1 SUPPORT
 
 There are no known bugs at the time of this release. However, if you spot a
-bug or are experiencing difficulties, that is not explained within the POD
-documentation, please send an email to barbie@cpan.org or submit a bug to the
-RT system (http://rt.cpan.org/). However, it would help greatly if you are 
-able to pinpoint problems or even supply a patch. 
+bug or are experiencing difficulties that are not explained within the POD
+documentation, please submit a bug to the RT system (see link below). However,
+it would help greatly if you are able to pinpoint problems or even supply a 
+patch. 
 
 Fixes are dependant upon their severity and my availablity. Should a fix not
-be forthcoming, please feel free to (politely) remind me.
+be forthcoming, please feel free to (politely) remind me by sending an email
+to barbie@cpan.org .
+
+RT: http://rt.cpan.org/Public/Dist/Display.html?Name=CPAN-YACSmoke-Plugin-NNTPWeb
 
 =head1 SEE ALSO
 
@@ -208,15 +209,18 @@ For additional information, see the documentation for these modules:
 
 =head1 AUTHOR
 
-  Barbie, <barbie@cpan.org>
-  for Miss Barbell Productions <http://www.missbarbell.co.uk>.
+Barbie <barbie@cpan.org>
+for Miss Barbell Productions http://www.missbarbell.co.uk.
 
 =head1 COPYRIGHT AND LICENSE
 
-  Copyright (C) 2005 Barbie for Miss Barbell Productions.
-  All Rights Reserved.
+  Copyright (C) 2005-2007 Barbie for Miss Barbell Productions.
 
-  This module is free software; you can redistribute it and/or 
+  This library is free software; you can redistribute it and/or 
   modify it under the same terms as Perl itself.
+
+The full text of the licenses can be found in the Artistic file included with
+this distribution, or in perlartistic file available with your Perl 
+installation.
 
 =cut

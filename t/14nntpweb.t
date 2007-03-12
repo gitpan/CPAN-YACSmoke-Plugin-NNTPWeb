@@ -1,4 +1,4 @@
-use Test::More tests => 2;
+use Test::More tests => 7;
 
 eval "use WWW::Mechanize";
 plan skip_all => "WWW::Mechanize required for testing NNTPWeb plugin" if $@;
@@ -21,9 +21,33 @@ my $self  = {
     nntp_id => 187380
 };
 
-my $plugin = CPAN::YACSmoke::Plugin::NNTPWeb->new($self);
-isa_ok($plugin,'CPAN::YACSmoke::Plugin::NNTPWeb');
+{
+    # specify the start point
+    my $plugin = CPAN::YACSmoke::Plugin::NNTPWeb->new($self);
+    isa_ok($plugin,'CPAN::YACSmoke::Plugin::NNTPWeb');
+    my @list = $plugin->download_list();
+    cmp_ok(@list, 'gt', 0);
+}
 
-my @list = $plugin->download_list();
-ok(@list > 0);
+{
+    # use default start point
+    my $plugin = CPAN::YACSmoke::Plugin::NNTPWeb->new();
+    my @list = $plugin->download_list();
+    cmp_ok(@list, 'eq', 0);
+}
 
+{
+    my $plugin = CPAN::YACSmoke::Plugin::NNTPWeb->new($self);
+    $plugin->_put_storage(1234);
+    is($plugin->_get_storage(),1234);
+    $plugin->_put_storage(123456);
+    is($plugin->_get_storage(),123456);
+}
+
+{
+    # make a test run
+    my $plugin = CPAN::YACSmoke::Plugin::NNTPWeb->new($self);
+    my @list = $plugin->download_list(1);
+    cmp_ok(@list, 'gt', 0);
+    is($plugin->_get_storage(),187479);
+}
