@@ -1,5 +1,11 @@
 Revision history for Perl extension CPAN::YACSmoke::Plugin::NNTPWeb.
 
+0.06	12/03/2007
+	- Forgot to remove all references to Template::Extract now that we
+	  use a simple regex to find the pattern.
+	- Added a warning to Makefile.PL, as testing can take a long time -
+	  blame the new format of the web interface :(
+
 0.05	12/03/2007
 	- Attempts to create the directory where Storable file should reside,
 	  if it doesn't exist.

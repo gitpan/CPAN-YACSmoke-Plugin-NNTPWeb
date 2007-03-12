@@ -2,7 +2,7 @@ package CPAN::YACSmoke::Plugin::NNTPWeb;
 
 use strict;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 # -------------------------------------
 
@@ -38,7 +38,6 @@ This module should be use together with CPAN::YACSmoke.
 use lib qw(./lib);
 
 use WWW::Mechanize;
-use Template::Extract;
 use Storable;
 use File::Basename;
 use File::Path;
@@ -54,15 +53,6 @@ use constant    LIMIT   => 100;
 # Variables
 
 my $mechanize = WWW::Mechanize->new();
-my $extract   = Template::Extract->new();
-
-my $last_key = 0;
-
-my $template = q![% FOREACH data %]<tr>
-<td class="list">[% counter %]</td>
-<td class="list">[% subject %]</td>
-<td class="list">[% poster %]</td>
-<td class="list">[% timestamp %]</td>[% ... %]</tr>[% END %]!;
 
 # -------------------------------------
 # The Subs

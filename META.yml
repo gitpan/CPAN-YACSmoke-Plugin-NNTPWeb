@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                   CPAN-YACSmoke-Plugin-NNTPWeb
-version:                0.05
+version:                0.06
 abstract:               NNTP web plugin for CPAN-YACSmoke
 author:
   - Barbie <barbie@cpan.org>
@@ -11,7 +11,6 @@ installdirs:            site
 
 requires:
   CPAN::YACSmoke:       0.03
-  Template::Extract:    0
   WWW::Mechanize:       0
   Storable:             0
   File::Basename:       0
@@ -28,7 +27,7 @@ build_requires:
 provides:
   CPAN::YACSmoke::Plugin::NNTPWeb:
     file:     lib/CPAN/YACSmoke/Plugin/NNTPWeb.pm
-    version:  0.05
+    version:  0.06
 no_index:
   directory:
     - t
