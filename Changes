@@ -1,5 +1,10 @@
 Revision history for Perl extension CPAN::YACSmoke::Plugin::NNTPWeb.
 
+0.07	17/08/2009
+	- restructured retrieving download list.
+	- added protection against non-existent network connections
+	- updated tests.
+
 0.06	12/03/2007
 	- Forgot to remove all references to Template::Extract now that we
 	  use a simple regex to find the pattern.

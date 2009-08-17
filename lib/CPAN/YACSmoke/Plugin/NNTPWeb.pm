@@ -2,7 +2,7 @@ package CPAN::YACSmoke::Plugin::NNTPWeb;
 
 use strict;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 # -------------------------------------
 
@@ -74,9 +74,11 @@ sub new {
     my $hash  = shift;
 
     my $self = {};
-    foreach my $field (qw( smoke nntp_id )) {
+    foreach my $field (qw( smoke nntp_id limit )) {
         $self->{$field} = $hash->{$field}   if(exists $hash->{$field});
     }
+
+    $self->{limit} ||= LIMIT;
 
     bless $self, $class;
 }
@@ -101,21 +103,25 @@ sub download_list {
     return ()   unless($self->{smoke});
     my $cutoff = $self->{nntp_id} || $self->_get_storage();
 
-    my $start = $cutoff - 1;
-    my $stop  = $start + LIMIT;
+    my $this = $cutoff - 1;
+    my $that = $this;
 
-    while ($start < $stop) {
-        $mechanize->get( NNTP . "/$start" );
-        return @modules unless($mechanize->success());
-
-        my $content = $mechanize->content();
-        if($content =~ /CPAN Upload: ([^\s]+)/is) {
-            push @modules, $1;
+    while (@modules < $self->{limit}) {
+        $mechanize->get( NNTP . "/$this" );
+        if($mechanize->success()) {
+            my $content = $mechanize->content();
+            if($content =~ /CPAN Upload: ([^\s]+)/is) {
+                push @modules, $1;
+            }
+            $that = $this;
+        } else {
+            # check whether too many get failures
+            last    if(20 < $this - $that);
         }
-        $start++;
+        $this++;
     };
 
-    $self->_put_storage($start)	if($liverun);
+    $self->_put_storage($that)	if($liverun);
 
     return @modules;
 }
@@ -136,7 +142,14 @@ sub _put_storage {
     my $smoke = {};
 
     # make the directory if this is a new file
-    if(!-f $store) { mkpath(dirname($store)); }
+    if(!-f $store) { 
+        my $dir = dirname($store);
+        die "don't have permission to create '$store'\n"  if(!-e $dir && mkpath($dir) == 0 or !-r $dir); 
+    } elsif(-r $store) {
+        $smoke = retrieve($store);
+    } else {
+        die "don't have permission to access '$store'\n";
+    }
 
     $smoke = retrieve($store)   if(-r $store);
     $smoke->{nntp_id} = $nntp;
@@ -204,7 +217,7 @@ for Miss Barbell Productions http://www.missbarbell.co.uk.
 
 =head1 COPYRIGHT AND LICENSE
 
-  Copyright (C) 2005-2007 Barbie for Miss Barbell Productions.
+  Copyright (C) 2005-2009 Barbie for Miss Barbell Productions.
 
   This library is free software; you can redistribute it and/or 
   modify it under the same terms as Perl itself.

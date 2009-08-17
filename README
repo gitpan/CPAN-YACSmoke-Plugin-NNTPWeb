@@ -6,6 +6,11 @@ DESCRIPTION
 An NNTP Web plugin for CPAN::YACSmoke. As a standalone module it isn't
 terribly useful, as such see CPAN::YACSmoke for more useful information.
 
+PLEASE NOTE: This distro was written for CPAN-YACSmoke. As the recommended
+CPANPLUS smoker is now CPANPLUS-Smoker, my intention is to rewrite this distro
+for that distro when I have the time. This latest release is only to avoid
+unnecessary fail reports from appearing in CPAN testers.
+
 SYNOPSIS
 
   my $plugin = CPAN::YACSmoke::Plugin::NNTPWeb->new(%config);
