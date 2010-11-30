@@ -3,13 +3,17 @@ CPAN::YACSmoke::Plugin::NNTPWeb
 
 DESCRIPTION
 
+IMPORTANT NOTES: 
+
+  1) CPAN::YACSmoke is no longer supported.
+  2) The recommend CPANPLUS smoker is now CPANPLUS-Smoker.
+  3) The NNTP feed has now been disabled. 
+  4) The CPAN Testers mailing list has now been disabled. 
+
+As such this module will be removed from CPAN in January 2011.
+
 An NNTP Web plugin for CPAN::YACSmoke. As a standalone module it isn't
 terribly useful, as such see CPAN::YACSmoke for more useful information.
-
-PLEASE NOTE: This distro was written for CPAN-YACSmoke. As the recommended
-CPANPLUS smoker is now CPANPLUS-Smoker, my intention is to rewrite this distro
-for that distro when I have the time. This latest release is only to avoid
-unnecessary fail reports from appearing in CPAN testers.
 
 SYNOPSIS
 
@@ -20,7 +24,6 @@ DEPENDENCIES
 
 The distribution requires the following modules:
 
-  CPAN::YACSmoke
   WWW::Mechanize
   Template::Extract
   Storable            (CORE Perl)
@@ -32,7 +35,7 @@ For testing purposes, the following modules are desireable, but not essential:
 
   Test::Pod
   Test::Pod::Coverage
-  Test::YAML::Meta
+  Test::CPAN::Meta
 
 INSTALLATION
 
@@ -81,11 +84,7 @@ for Miss Barbell Productions http://www.missbarbell.co.uk.
 
 COPYRIGHT AND LICENSE
 
-  Copyright (C) 2005-2007 Barbie for Miss Barbell Productions.
+  Copyright (C) 2005-2010 Barbie for Miss Barbell Productions.
 
-  This library is free software; you can redistribute it and/or 
-  modify it under the same terms as Perl itself.
-
-The full text of the licenses can be found in the Artistic file included with
-this distribution, or in perlartistic file available with your Perl 
-installation.
+  This module is free software; you can redistribute it and/or
+  modify it under the Artistic Licence v2.

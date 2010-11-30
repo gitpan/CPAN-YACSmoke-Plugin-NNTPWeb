@@ -5,7 +5,6 @@ WriteMakefile
     'VERSION_FROM' => 'lib/CPAN/YACSmoke/Plugin/NNTPWeb.pm',
     'PREREQ_PM' => {
                 'Test::More'            => 0,
-                'CPAN::YACSmoke'        => 0.03,
                 'WWW::Mechanize'        => 0,
 				'Template::Extract'     => 0,
 				'Storable'              => 0,

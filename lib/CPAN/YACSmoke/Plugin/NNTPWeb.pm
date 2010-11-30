@@ -2,13 +2,30 @@ package CPAN::YACSmoke::Plugin::NNTPWeb;
 
 use strict;
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 # -------------------------------------
 
 =head1 NAME
 
 CPAN::YACSmoke::Plugin::NNTPWeb - NNTP web plugin for CPAN::YACSmoke
+
+=head1 DESCRIPTION
+
+IMPORTANT NOTES: 
+
+  1) CPAN::YACSmoke is no longer supported.
+  2) The recommend CPANPLUS smoker is now CPANPLUS-Smoker.
+  3) The NNTP feed has now been disabled. 
+  4) The CPAN Testers mailing list has now been disabled. 
+
+As such this module will be removed from CPAN in January 2011.
+
+This module provides the backend ability to access the list of current
+modules, as posted by PAUSE via the NNTP service, and can be seen on the
+webpage at http://www.nntp.perl.org/group/perl.cpan.testers/.
+
+This module should be use together with CPAN::YACSmoke.
 
 =head1 SYNOPSIS
 
@@ -21,14 +38,6 @@ CPAN::YACSmoke::Plugin::NNTPWeb - NNTP web plugin for CPAN::YACSmoke
   my @list = $foo->download_list($testrun);
 
   # (*) defaults to the last id it saw.
-
-=head1 DESCRIPTION
-
-This module provides the backend ability to access the list of current
-modules, as posted by PAUSE via the NNTP service, and can be seen on the
-webpage at http://www.nntp.perl.org/group/perl.cpan.testers/.
-
-This module should be use together with CPAN::YACSmoke.
 
 =cut
 
@@ -193,8 +202,15 @@ RT: http://rt.cpan.org/Public/Dist/Display.html?Name=CPAN-YACSmoke-Plugin-NNTPWe
 
 =head1 SEE ALSO
 
-The CPAN Testers Website at L<http://testers.cpan.org> has information
-about the CPAN Testing Service.
+CPAN Testers Reports - L<http://www.cpantesters.org>
+
+CPAN Testers Wiki - L<http://wiki.cpantesters.org>
+
+CPAN Testers Blog - L<http://blog.cpantesters.org>
+
+CPAN Testers Development - L<http://devel.cpantesters.org>
+
+CPAN Testers Statistics - L<http://stats.cpantesters.org>
 
 For additional information, see the documentation for these modules:
 
@@ -217,13 +233,9 @@ for Miss Barbell Productions http://www.missbarbell.co.uk.
 
 =head1 COPYRIGHT AND LICENSE
 
-  Copyright (C) 2005-2009 Barbie for Miss Barbell Productions.
+  Copyright (C) 2005-2010 Barbie for Miss Barbell Productions.
 
-  This library is free software; you can redistribute it and/or 
-  modify it under the same terms as Perl itself.
-
-The full text of the licenses can be found in the Artistic file included with
-this distribution, or in perlartistic file available with your Perl 
-installation.
+  This module is free software; you can redistribute it and/or
+  modify it under the Artistic Licence v2.
 
 =cut
